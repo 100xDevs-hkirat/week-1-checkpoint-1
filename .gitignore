@@ -1,2 +1,4 @@
 admin-client/node_modules
+server/node_modules
 .idea
+.env
