@@ -1,11 +1,12 @@
 import Button from '@mui/material/Button';
 import TextField from "@mui/material/TextField";
-import {Card, Typography} from "@mui/material";
-import {useState} from "react";
+import { Card, Typography } from "@mui/material";
+import { useState } from "react";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
-import {useSetRecoilState} from "recoil";
-import {userState} from "../store/atoms/user.js";
+import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { userState } from "../store/atoms/user.js";
+import { BASE_URL } from '../config.js';
 
 function Signin() {
     const [email, setEmail] = useState("")
@@ -14,18 +15,18 @@ function Signin() {
     const setUser = useSetRecoilState(userState);
 
     return <div>
-            <div style={{
-                paddingTop: 150,
-                marginBottom: 10,
-                display: "flex",
-                justifyContent: "center"
-            }}>
-                <Typography variant={"h6"}>
-                Welcome to Coursera. Sign up below
-                </Typography>
-            </div>
-        <div style={{display: "flex", justifyContent: "center"}}>
-            <Card varint={"outlined"} style={{width: 400, padding: 20}}>
+        <div style={{
+            paddingTop: 150,
+            marginBottom: 10,
+            display: "flex",
+            justifyContent: "center"
+        }}>
+            <Typography variant={"h6"}>
+                Welcome Back. Sign in.
+            </Typography>
+        </div>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+            <Card varint={"outlined"} style={{ width: 400, padding: 20 }}>
                 <TextField
                     onChange={(evant11) => {
                         let elemt = evant11.target;
@@ -35,7 +36,7 @@ function Signin() {
                     label="Email"
                     variant="outlined"
                 />
-                <br/><br/>
+                <br /><br />
                 <TextField
                     onChange={(e) => {
                         setPassword(e.target.value);
@@ -45,17 +46,16 @@ function Signin() {
                     variant="outlined"
                     type={"password"}
                 />
-                <br/><br/>
+                <br /><br />
 
                 <Button
                     size={"large"}
                     variant="contained"
                     onClick={async () => {
-                        const res = await axios.post(`${BASE_URL}/admin/login`, {
-                            username: email,
-                            password: password
-                        }, {
+                        const res = await axios.post(`${BASE_URL}/admin/login`, {}, {
                             headers: {
+                                username: email,
+                                password: password,
                                 "Content-type": "application/json"
                             }
                         });
